@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Dupale | AI Automation &amp; STEM Educator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --surface: #fcfbf8;
+      --surface-alt: #eae4d8;
+      --sage: #466357;
+      --sage-soft: #dce5df;
+      --ink: #1a1d1c;
+      --muted: #4b524f;
+      --border: 2px solid #1a1d1c;
+      --shadow: 4px 4px 0px #1a1d1c;
+      --shadow-sm: 3px 3px 0px #1a1d1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* Top Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border: 1.5px solid var(--ink);
+      background: var(--bg);
+      transition: transform 0.12s ease, background-color 0.12s ease;
+    }
+
+    nav a:hover {
+      background: var(--sage-soft);
+      transform: translate(-1px, -1px);
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--surface);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 36px 32px;
+      margin-bottom: 32px;
+    }
+
+    .status-pill {
+      display: inline-block;
+      background: var(--sage-soft);
+      border: 1.5px solid var(--ink);
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 26px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 12px 18px;
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #1a1d1c;
+    }
+
+    .btn-primary {
+      background: var(--sage);
+      color: #fcfbf8;
+    }
+
+    .btn-secondary {
+      background: var(--surface-alt);
+      color: var(--ink);
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    /* Section Headings */
+    section {
+      margin-bottom: 36px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--surface);
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    /* Cards & Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-alt {
+      background: var(--surface-alt);
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--sage);
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border: 1.5px solid var(--ink);
+      background: var(--bg);
+    }
+
+    .tag-sage {
+      background: var(--sage-soft);
+    }
+
+    /* Highlight Strip */
+    .highlight-box {
+      background: var(--sage-soft);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 18px 22px;
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .highlight-box p {
+      font-size: 0.94rem;
+      font-weight: 500;
+      max-width: 620px;
+    }
+
+    /* Contact Panel */
+    .contact-panel {
+      background: var(--surface);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      border: 1.5px solid var(--ink);
+      background: var(--bg);
+      padding: 12px 14px;
+    }
+
+    .contact-item span {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .contact-item a,
+    .contact-item strong {
+      color: var(--ink);
+      font-size: 0.92rem;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 24px 20px;
+      }
+      .card {
+        padding: 18px;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand mono">ALPHA DUPALE</div>
+      <nav class="mono">
+        <a href="#ai">AI &amp; Automation</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#cvs">CVs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="status-pill mono">Ho Chi Minh City, Vietnam ; Open to Remote AI &amp; Saigon Teaching Roles</div>
+        <h1>Systems Builder, STEM Educator, Operations Lead.</h1>
+        <p class="hero-sub">
+          I build practical AI and workflow automation pipelines for lean teams, and teach Science, Math, and English with clear structure and hands-on classroom design. Grounded in UPLB STEM training, IRRI bioinformatics, and real-world farm operations.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="alpha_dupale_ai_automation_cv.pdf" download>Download AI &amp; Automation CV (PDF)</a>
+          <a class="btn btn-secondary" href="alpha_dupale_teaching_cv.pdf" download>Download Teaching CV (PDF)</a>
+          <a class="btn btn-outline" href="#contact">Get in Touch</a>
+        </div>
+      </section>
+
+      <!-- AI & AUTOMATION SECTION -->
+      <section id="ai">
+        <div class="section-header">
+          <h2 class="section-title">AI &amp; Workflow Automation</h2>
+          <span class="section-tag mono">Track 01 / Remote &amp; Ops</span>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <div>
+              <div class="card-label mono">Messaging &amp; AI Pipeline</div>
+              <h3>Zalo, Zapier, and AI Operations Workflow</h3>
+              <p>
+                Automated daily field intake by routing Zalo messages through Zapier and AI parsing into structured operational logs, cutting manual copy-paste work and speeding up team reporting.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">Zapier</span>
+              <span class="tag">Zalo</span>
+              <span class="tag">LLM Workflows</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="card-label mono">Data Engineering</div>
+              <h3>Python Harvest ETL Pipeline</h3>
+              <p>
+                Built Python extract, transform, and load routines to clean raw harvest records, standardize metrics across cycles, and generate reliable output tables for operations review.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">Python</span>
+              <span class="tag">ETL</span>
+              <span class="tag">Data Cleaning</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="card-label mono">Database &amp; Scripting</div>
+              <h3>FarmBook Ownership &amp; Google Apps Script</h3>
+              <p>
+                Managed core FarmBook operational records and wrote Google Apps Script automations to sync spreadsheets, trigger alerts, and keep reporting accurate across departments.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">Google Apps Script</span>
+              <span class="tag">Databases</span>
+              <span class="tag">Sheets Automation</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="card-label mono">Scientific Foundation</div>
+              <h3>IRRI Bioinformatics &amp; Research Systems</h3>
+              <p>
+                Trained in bioinformatics workflows at the International Rice Research Institute (IRRI), bringing analytical rigor, reproducible documentation, and structured data thinking to business automation.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">Bioinformatics</span>
+              <span class="tag">Analytics</span>
+              <span class="tag">Documentation</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="highlight-box">
+          <p>Looking for someone who can audit messy spreadsheets, connect messaging tools, and ship working AI automations without overengineering?</p>
+          <a class="btn btn-primary" href="alpha_dupale_ai_automation_cv.pdf" target="_blank" rel="noopener">View AI CV</a>
+        </div>
+      </section>
+
+      <!-- TEACHING SECTION -->
+      <section id="teaching">
+        <div class="section-header">
+          <h2 class="section-title">Science, Math &amp; English Teaching</h2>
+          <span class="section-tag mono">Track 02 / Saigon Schools</span>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <div>
+              <div class="card-label mono">Featured Lesson Package</div>
+              <h3>Atomic Structure Chemistry Module</h3>
+              <p>
+                Complete classroom-ready Chemistry package built with clear everyday analogies, a full presenter script, a kinesthetic student activity, and a no-tech backup kit for zero-downtime delivery.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">Chemistry</span>
+              <span class="tag">Active Learning</span>
+              <span class="tag">Lesson Design</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="card-label mono">Credentials &amp; Bilingual Materials</div>
+              <h3>120-Hour TESOL &amp; Bilingual Instruction</h3>
+              <p>
+                Certified 120-hour TESOL instructor creating bilingual English and Vietnamese study aids so ESL learners grasp STEM vocabulary and core concepts faster with real classroom confidence.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">120h TESOL</span>
+              <span class="tag">EN / VI Materials</span>
+              <span class="tag">ESL &amp; STEM</span>
+            </div>
+          </article>
+
+          <article class="card card-alt">
+            <div>
+              <div class="card-label mono">Academic Background</div>
+              <h3>UPLB STEM &amp; Student Leadership</h3>
+              <p>
+                Grounded in University of the Philippines Los Banos (UPLB) scientific training and leadership experience; comfortable guiding mixed-ability classrooms across Science, Math, and English.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag">UPLB STEM</span>
+              <span class="tag">Science &amp; Math</span>
+              <span class="tag">Classroom Management</span>
+            </div>
+          </article>
+
+          <article class="card card-alt">
+            <div>
+              <div class="card-label mono">Saigon Availability</div>
+              <h3>Ready for Ho Chi Minh City Classrooms</h3>
+              <p>
+                Based in Ho Chi Minh City and ready for demo lessons, full-time or part-time Science, Math, and ESL placements at bilingual schools, international centers, and STEM programs.
+              </p>
+            </div>
+            <div class="tags mono">
+              <span class="tag tag-sage">HCMC Based</span>
+              <span class="tag">Demo Ready</span>
+              <span class="tag">Flexible Schedule</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="highlight-box">
+          <p>Hiring for Science, Math, or English in Ho Chi Minh City? Review my condensed 1-page Teaching CV or book a demo lesson.</p>
+          <a class="btn btn-secondary" href="alpha_dupale_teaching_cv.pdf" target="_blank" rel="noopener">View Teaching CV</a>
+        </div>
+      </section>
+
+      <!-- DIRECT CV DOWNLOADS -->
+      <section id="cvs">
+        <div class="section-header">
+          <h2 class="section-title">Resume Downloads</h2>
+          <span class="section-tag mono">1-Page PDFs</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div>
+              <div class="card-label mono">For Remote Tech &amp; Ops Teams</div>
+              <h3>AI &amp; Workflow Automation CV</h3>
+              <p>Covers Zapier, Zalo AI pipelines, Python ETL, FarmBook database ownership, Google Apps Script, and IRRI bioinformatics.</p>
+            </div>
+            <a class="btn btn-primary" href="alpha_dupale_ai_automation_cv.pdf" download>Download PDF</a>
+          </div>
+          <div class="card">
+            <div>
+              <div class="card-label mono">For Saigon Schools &amp; Centers</div>
+              <h3>STEM &amp; TESOL Teaching CV</h3>
+              <p>Covers 120-hour TESOL certification, Chemistry lesson architecture, bilingual English/Vietnamese materials, and UPLB STEM roots.</p>
+            </div>
+            <a class="btn btn-secondary" href="alpha_dupale_teaching_cv.pdf" download>Download PDF</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+          <span class="section-tag mono">Direct Channels</span>
+        </div>
+        <div class="contact-panel">
+          <p>Reach out directly by email, phone, or Zalo for Saigon teaching demo lessons, workflow audits, or remote AI automation roles.</p>
+          <div class="contact-grid mono">
+            <div class="contact-item">
+              <span>Email</span>
+              <a href="mailto:aadupale@up.edu.ph">aadupale@up.edu.ph</a>
+            </div>
+            <div class="contact-item">
+              <span>Phone / Zalo</span>
+              <a href="tel:0372167901">0372167901</a>
+            </div>
+            <div class="contact-item">
+              <span>LinkedIn</span>
+              <a href="https://linkedin.com/in/ajd000" target="_blank" rel="noopener">https://linkedin.com/in/ajd000</a>
+            </div>
+            <div class="contact-item">
+              <span>GitHub</span>
+              <a href="https://github.com/aadupale-cpu" target="_blank" rel="noopener">https://github.com/aadupale-cpu</a>
+            </div>
+            <div class="contact-item">
+              <span>Location</span>
+              <strong>Ho Chi Minh City, Vietnam</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mono">
+      Alpha Dupale ; Ho Chi Minh City, Vietnam ; Built cleanly in HTML &amp; CSS.
+    </footer>
+  </div>
+</body>
+</html>
